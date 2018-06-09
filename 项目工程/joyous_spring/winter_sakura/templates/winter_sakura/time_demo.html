@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load dict_plus %}
+    <meta charset="UTF-8">
+    <link href="{% static "css/bootstrap.min.css"%}">
+    <link href="{% static "css/bootstrap-theme.min.css"%}">
+    <title>测试时间计算</title>
+    <script href="{% static "js/jquery-3.1.1.min.js" %}"></script>
+    <script href="{% static "js/bootstrap.min.js" %}"></script>
+</head>
+<body>
+<form role="form" method="post">
+  <div class="form-group">
+    <label for="name">
+        <span>上班时间</span><input type=time name="arrive_time"><br><br>
+        <span>下班时间</span><input type=time name="back_time"><br><br>
+        <input type="submit" value="提交">
+    </label>
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,62 @@
+.shell_library
+{
+    min-width: 960px;
+    width: 100%;
+    height: 2480px;
+    background: url("../images/library_bg.jpg") no-repeat fixed 50% 0;
+}
+#head_library{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    min-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+body {
+    margin:0;
+    padding:0;
+    text-align: center;
+    min-width: 960px;
+    font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif;
+}
+/* ¸²¸ÇindexµÄcssÑùÊ½ */
+.head_ex{
+    margin-top: 10px;
+    height: 190px;
+    background: rgba(72,109,118,0.6);
+}
+.search{
+    margin-top: -10px;
+}
+/*--------------------------*/
+.library_model{
+    margin: 0 auto;
+    position: relative;
+    top: 250px;
+    width: 950px;
+    border:2px rgba(255,255,255,0.7) solid;
+}
+.library_model article{
+    line-height: 27px;
+    color: seashell;
+    text-indent: 2em;
+    text-align: left;
+    background-color: rgba(72,109,118,0.8);
+}
+.title{
+    background-color: rgba(0,0,0,0.7);
+    font-size: 30px;
+    color: seashell;
+    line-height: 50px;
+}
+article p{
+    margin: 0;
+}
+
+.foot{
+    top: 2280px;
+    background: none;
+}

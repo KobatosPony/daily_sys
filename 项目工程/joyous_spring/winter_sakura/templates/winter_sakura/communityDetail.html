@@ -1,0 +1,69 @@
+{% load static %}
+{% load dict_plus %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>回复</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/communityDetail.css' %}">
+</head>
+<body>
+	<!-- 头部导航 -->
+	<header>
+		<div id="logo">
+			<a href="{% url 'index' %}">
+				<img src="{% static 'image/logo_white.png' %}">
+			</a>
+		</div>
+		<div id="menu">
+            <a href="{% url 'index' %}">首页</a>
+            <a href="{% url 'theme' page=1 %}">社区</a>
+            {% if ret_user %}
+                <a href="{% url 'person' %}">{{ ret_user.nickname }}({{ ret_user.staff_dept }}-{{ ret_user.true_name }})</a>
+                <a href="{% url 'logout' %}">退出</a>
+            {% else %}
+                <a href="{% url 'login_demo' %}">登录</a>
+                <a href="{% url 'register_demo' %}">注册</a>
+            {% endif %}
+		</div>
+	</header>
+
+	<div id="content">
+		<div id="primaryContent">
+			<div id="primaryContent_title">
+				<h4>{{ ret_theme_data.title }}</h4>
+				<div id="author">
+					<span><img src="{% static 'image/person.png' %}">&nbsp;{{ ret_theme_data.user.nickname }}</span>
+					<span><img src="{% static 'image/time.png' %}" style="width: 12px;">&nbsp;{{ ret_theme_data.create_date|date:"Y年m月d日 H:i" }}</span>
+				</div>
+			</div>
+			<div id="primaryContent_content">
+				<p>{{ ret_theme_data.content }}</p>
+			</div>
+            {% for item in ret_reply_data %}
+                <div class="replayList">
+                    <table>
+                        <tr>
+                            <td>{{ item.user.nickname }}：</td>
+                            <td>{{ item.content }}</td>
+                        </tr>
+                    </table>
+                    <span>{{ item.create_date|date:"Y年m月d日 H:i" }}</span>
+			    </div>
+            {% endfor %}
+
+		</div>
+		<div id="pageList">
+		    {{ page_html }}
+		</div>
+	</div>
+	<div id="replay">
+		<form method="post" action="{% url 'theme_reply' %}">
+			<label>发表回复：</label><br>
+			<textarea name="replayContent" rows="16" id="replayContent" placeholder="请输入发布内容"></textarea>
+			<input type="submit" name="replayBtn" id="replayBtn" value="发&nbsp;表">
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+</html>

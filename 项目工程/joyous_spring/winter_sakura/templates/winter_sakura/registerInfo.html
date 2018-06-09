@@ -1,0 +1,51 @@
+{% load static %}
+{% load dict_plus %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>考勤记录</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/registerInfo.css' %}">
+</head>
+<body>
+	<!-- 头部导航 -->
+	  <header>
+		<div id="logo">
+			<a href="{% url 'index' %}">
+				<img src="{% static 'image/logo_white.png' %}">
+			</a>
+		</div>
+		<div id="menu">
+            <a href="{% url 'index' %}">首页</a>
+            <a href="{% url 'theme' page=1 %}">社区</a>
+            {% if ret_user %}
+                <a href="{% url 'person' %}">{{ ret_user.nickname }}({{ ret_user.staff_dept }}-{{ ret_user.true_name }})</a>
+                <a href="{% url 'logout' %}">退出</a>
+            {% else %}
+                <a href="{% url 'login_demo' %}">登录</a>
+                <a href="{% url 'register_demo' %}">注册</a>
+            {% endif %}
+		</div>
+	</header>
+
+	<div id="content">
+		<div id="registerInfo_content">
+			<table>
+				<tr class="registerInfo_content_head">
+					<td width="200px">时间</td>
+					<td width="100px">类别</td>
+					<td width="280px">备注</td>
+				</tr>
+                {% for item in ret_data %}
+                <tr>
+					<td>{{ item.check_time|date:"Y-m-d H:i" }}</td>
+					<td>{{ item.check_type }}</td>
+                    <td>{{ item.staff_id.true_name }}({{ item.staff_id.staff_dept }})</td>
+				</tr>
+                {% endfor %}
+			</table>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+</html>

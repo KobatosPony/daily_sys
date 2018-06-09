@@ -1,0 +1,273 @@
+body,html{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 14px;
+	background: #E8E8E8;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+}
+a:hover{
+	color: #cc99cc;
+}
+
+header{
+	z-index: 9;
+	position: fixed;
+	top: 0;
+	background: #669999;
+	width: 100%;
+	/*min-width: 400px;*/
+}
+header div{
+	display: inline-block;
+}
+#logo{
+	margin-left: 40px;
+}
+#logo a{
+	line-height: 36px;
+}
+#logo img{
+	margin-top: 10px;
+	width: 100px;
+}
+#menu{	
+	float: right;
+	margin-top: 34px;
+	margin-right: 40px;
+	font-size: 16px;
+}
+#menu a{
+	margin: 5px;
+}
+#content{
+	position: relative;
+	top: 50px;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 960px;
+	min-width: 700px;
+	background: #fff;
+}
+
+@media(max-width: 400px){
+	#logo img{
+		width: 80px;
+	}
+	#menu{	
+		float: right;
+		margin-top: 34px;
+		margin-right: 20px;
+		font-size: 14px;
+	}
+	#content{
+		top: 55px;
+	}
+}
+
+#information{
+	widows: 100%;
+	background: #fff;
+	height: 340px;
+}
+#information_left{
+	float: left;
+	margin: 0 auto;
+	width: 40%;
+	background: #fff;
+	text-align: center;
+}
+#information_left .left_div{
+	margin: 0 auto;
+	text-align: center;
+	padding: 82px 0 20px 0;
+	/*border: 1px solid #669999;
+	width: 80%;*/
+}
+#information_left .left_div img{
+	width: 30%;
+	border: 4px solid #669999;
+	border-radius: 50%;
+}
+#information_left .left_name p{
+	font-size: 18px;
+	color: #818181;
+	margin: 0;
+	margin-bottom: 54px;
+}
+
+#information_right{
+	float: left;
+	background: #fff;
+	width: 60%;
+	margin: 0 auto;
+}
+#information_right .right_head{
+	width: 100%;
+}
+#information_right .right_head h4{
+	font-size: 20px;
+	color: #818181;
+	font-weight: 400;
+	border-bottom: 1px solid #669999;
+	margin: 40px 10px 20px 10px;
+	padding-bottom: 6px;
+}
+#information_right .right_content{
+	width: 100%;
+	padding: 0 10px;
+}
+#information_right .right_content table tr{
+	line-height: 30px;
+	color: #818181;
+}
+
+#registerInfo,
+#communityInfo{
+	width: 100%;
+	background: #fff;
+}
+#registerInfo_head,
+#communityInfo_head{
+	padding: 0 40px;
+	color: #818181;
+}
+#registerInfo_head h4,
+#communityInfo_head h4{
+	border-bottom: 1px solid #669999;
+	padding-bottom: 10px;
+	font-size: 18px;
+	font-weight: 400;
+}
+#registerInfo_head input,
+#communityInfo_head input{
+	float: right;
+	background: #669999;
+	border: none;
+	color: #fff;
+	margin: 0 6px;
+	padding: 4px 10px;
+	border-radius: 4px;
+}
+#registerInfo_head input:hover,
+#communityInfo_head input:hover{
+	color: #cc99cc;
+}
+
+#registerInfo_content,
+#communityInfo_content{
+	/*width: 100%;*/
+	background: #fff;
+	padding: 0 40px 40px 40px;
+}
+#registerInfo_content .registerInfo_content_head,
+#communityInfo_content .communityInfo_content_head{
+	width: 100%;
+}
+#registerInfo_content .registerInfo_content_head td{
+	color: #669999;
+	padding: 0 200px 0 20px;
+}
+#communityInfo_content .communityInfo_content_head td{
+	color: #669999;
+}
+#communityInfo_content .infoTime{
+	padding-right: 200px;
+}
+#communityInfo_content .infoTitle{
+	padding-right: 400px;
+}
+#registerInfo_content table tr td,
+#communityInfo_content table tr td{
+	color: #818181;
+	padding: 10px 0 0 20px;
+}
+#communityInfo_content .detailBtn{
+	float: right;
+}
+#communityInfo_content .detailBtn a{
+	color: #818181;
+}
+#communityInfo_content .detailBtn a:hover{
+	color: #cc99cc;
+}
+
+#wrap{
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background: #818181;
+	opacity: 0.4;
+	display: none;
+}
+#qtDiv{
+	z-index: 11;
+	position: fixed;
+	top: 0;
+	background: #fff;
+	width: 300px;
+	height: 160px;
+	border-radius: 8px;
+	text-align: center;
+	padding-top: 40px;
+	display: none;
+}
+#qtDiv p{
+	color: #818181;
+}
+#qtDiv input{
+	background: #669999;
+	border: none;
+	padding: 4px 10px;
+	border-radius: 4px;
+	color: #fff;
+	margin-top: 40px;
+	margin: 40px 20px;
+}
+
+#qjDiv{
+	z-index: 11;
+	position: fixed;
+	top: 0;
+	background: #fff;
+	width: 400px;
+	height: 500px;
+	border-radius: 8px;
+	padding-top: 20px;
+	padding-left: 40px;
+	color: #818181;
+	display: none;
+}
+#qjDiv h4{
+	color: #818181;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 400;
+}
+#qjDiv input{
+	width: 86%;
+	padding: 6px 6px;
+	border: 1px solid #669999;
+	border-radius: 4px;
+	font-size: 12px;
+}
+#qjDiv textarea{
+	width: 86%;
+	padding: 6px 6px;
+	border: 1px solid #669999;
+	border-radius: 4px;
+	font-size: 12px;
+}
+#sure_qj,
+#unsure_qj{
+	background: #669999;
+	border: none;
+	padding: 4px 10px;
+	border-radius: 4px;
+	color: #fff;
+	margin: 10px 4px;
+}

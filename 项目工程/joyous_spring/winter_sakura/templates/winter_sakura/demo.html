@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星象馆招待处</title>
+    <link rel="shortcut icon" href="{% static "images/favicon.ico"%}" />
+    <link href="{%static "css/headmaster.css"%}" rel="stylesheet" type="text/css">
+    <link href="{%static "css/bodymaster.css"%}" rel="stylesheet" type="text/css">
+    <link href="{%static "css/footmaster.css"%}" rel="stylesheet" type="text/css">
+    <link href="{%static "css/Yumemi.css"%}" rel="stylesheet" type="text/css">
+    <link href="{%static "css/plus.css"%}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="shell">
+        <div id="head">
+            <div id="head_bg">
+                <div id="head_nav">
+                    <ul class="nav">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">科普</a></li>
+                        <li><a href="#">故事</a></li>
+                        <li><a href="#">图片</a></li>
+                        <li><a href="#">天象</a></li>
+                    </ul>
+                    <ul class="reg">
+                        <li><a href="#">登录</a></li>
+                        <li><a href="#">注册</a></li>
+                    </ul>
+                </div>
+                <div class="head_ex">
+                    <div class="search">
+                        <div id="span">
+                            <li>p</li>
+                            <li>l</li>
+                            <li>a</li>
+                            <li>n</li>
+                            <li>e</li>
+                            <li>t</li>
+                            <li>a</li>
+                            <li>r</li>
+                            <li>i</li>
+                            <li>a</li>
+                            <li>n</li>
+                        </div>
+                        <form  target="_blank"  method="get" action="http://www.baidu.com/s">
+                            <table>
+                                <tr>
+                                    <td><br/><input type="text" name="word"/></td>
+                                    <td><br/><input type="submit" value="百度一下" /></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--头部-->
+        <div class="main_body">
+            <div class="body">
+                <div id="first_model">
+                    <div id="rollpad">
+                        <ul id="roll_ul" style="width: 400%;margin-left: 0">
+                            <li><a class="pad_a" href="#"><img src="{%static ""%}images/pl1.jpg"></a></li>
+                            <li><a class="pad_a" href="#"><img src="{%static ""%}images/pl2.jpg"></a></li>
+                            <li><a class="pad_a" href="#"><img src="{%static ""%}images/pl3.jpg"></a></li>
+                            <li><a class="pad_a" href="#"><img src="{%static ""%}images/pl4.jpg"></a></li>
+                        </ul>
+                    </div>
+                    <div id="click_roll">
+                        <ul>
+                            <li><div class="roll_point_1"></div></li>
+                            <li><div class="roll_point_2"></div></li>
+                            <li><div class="roll_point_3"></div></li>
+                            <li><div class="roll_point_4"></div></li>
+                        </ul>
+                    </div>
+                    <div id="news_pad">
+                        <ul class="short_news">
+                            <li>九月二十九日:<br><span>水星凌日最佳观测日</span></li>
+                            <li><br>八月十二日:<br><span>英仙座流星雨观测日</span></li>
+                            <li><br>十二月十四日:<br><span>双子座流星雨观测日</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--滑动板块部分-->
+                <div id="second_model">
+                    <img src="{%static "images/cancer2.png"%}">
+                    <img src="{%static "images/cancer.jpg"%}">
+                    <div class="model_text">
+                        <div class="text_title">
+                            <span>巨蟹座(6.22-7.22)</span>
+                        </div>
+                        <div>
+                            <p>巨蟹座是夏天开始的第一个星座。位于双子座之东，狮子座之西，巨蟹座的
+                                占星符号象征两个蟹爪。巨蟹座真挚细腻，忠诚善良，坚韧执着，有着不
+                                屈不挠的意志力；但也十分的情绪化，敏感，缺乏安全感，以致难以取悦
+                                且容易歇斯底里。 巨蟹座是黄道十二宫星座之一，面积505.87平方度，占全天面
+                                积的1.226%。巨蟹座中亮于5.5等的恒星有23颗，最亮星为柳宿增十（巨蟹座β），
+                                视星等为3.52。每年1月30日子夜巨蟹座中心经过上中天。巨蟹座位于双子
+                                座和狮子座之间、北方是天猫座、南面则是小犬座和长蛇座,是一个很暗的
+                                星座，没有亮于3等的恒星。中心位置：赤经8时10分,赤纬20度。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="third_model">
+                    <img src="{%static "images/red-shift.jpg"%}">
+                    <div class="model_text">
+                        <div class="text_title">
+                            <span><a href="library.html" target="_blank" style="color: white;text-decoration: none">天文学知识科普：什么是红移？</a></span>
+                        </div>
+                        <div>
+                                <p>红移在物理学和天文学领域，指物体的电磁辐射由于某种原因波长增加的现象，在可见光波段，表现为光谱
+                                的谱线朝红端移动了一段距离，即波长变长、频率降低。红移的现象目前多用于天体的移动及规律的预测上。</p>
+                                <p>红移最初是在人们熟悉的可见光波段发现的，随着对电磁波谱各个波段的了解逐步深入，任何电磁辐射的波
+                                长增加都可以称为红移。对于波长较短的γ射线、X-射线和紫外线等波段，波长变长确实是波谱向红光移动，
+                                “红移”的命名并无问题；而对于波长较长的红外线、微波和无线电波等波段，尽管波长增加实际上是远离
+                                红光波段，这种现象还是被称为“红移”。另一种红移机制被用于解释在遥远的星系、类星体，星系间的气
+                                体云的光谱中观察到的红移现象。红移增加的比例与距离成正比。这种关系为宇宙在膨胀的观点提供了有力
+                                的支持，比如大爆炸宇宙模型。</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="forth_model">
+                    <img src="{%static "images/bear.jpg"%}">
+                    <div class="model_text">
+                        <div class="text_title">
+                            <span><a href="story.html" target="_blank" style="color: white;text-decoration: none">星座故事(大熊座)</a></span>
+                        </div>
+                        <div>
+                            <p>相传，卡力斯托是一个温柔美丽的妙龄少女。她的眉毛细又长，好像树上的弯月亮；她的眼睛明又亮，好像秋波一个样；
+                            她的脸儿红又圆，胜似苹果到秋天。苗条而不消瘦的身段呈现出运动员的气质，使她爱上狩猎的运动，经常跟随狩猎女
+                            神又是月神的阿尔忒弥斯外出狩猎，练就了一身过硬的狩猎本领。不久，她被众神之父宙斯所爱，生下了一个天真可爱
+                            的阿卡斯。</p>
+                            <p>原来，众神之父宙斯已有了妻子，神后的名字叫赫拉。一天，赫拉发现了宙斯与卡力斯托的关系，卡力斯托的美丽、
+                            贤慧、勇敢，使赫拉顿时产生了嫉妒之心。于是，她就用神力残忍的把卡力斯托变成了一只母熊，破坏了她与宙斯
+                            的关系。<a href="http://www.d1xz.net/astro/zhishi/art118626.aspx" style="text-decoration: none;color: seashell" target="_blank">(查看全部)</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="fifth_model">
+                    <img src="{%static "images/pic5.jpg"%}">
+                    <div class="model_text">
+                        <div class="text_title">
+                            <span><a href="photo.html" target="_blank" style="color: white;text-decoration: none">星空写真（船底座大星云)</a></span>
+                        </div>
+                        <div>
+                            <p>
+                                船底座大星云（又名为NGC3372），是南半球星空的一颗明珠，它的空间范围超过300光年，是银河系中最大
+                                的恒星形成区之一。与著名的猎户座大星云一样，船底座大星云也很容易为肉眼所见，虽然它远在7500光年
+                                之外，比猎户座大星云远出5倍。这幅华丽的特写揭示了该恒星形成区中央的发光星际气体和模糊尘埃云的高
+                                清细节。这片视场宽约50多光年宽。船底座大星云是年轻的极大质量恒星的家园，包括疏散星团Trumpler 14
+                                （中央右下方）中的一众恒星，以及谜一般的变星船底座η，其质量是太阳质量的100多倍。船底座η星刚好
+                                位于钥匙孔星云（NGC 3324）的上方，这颗变星很可能正濒临超新星爆发的边缘。
+                            </p>
+                            <p>
+                                <a href="http://www.astron.ac.cn/bencandy-22-14145-1.htm#" target="_blank" style="text-decoration: none;color: seashell">
+                                    (查看原地址)
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--主页内容-->
+            </div>
+        </div>
+
+        <div class="foot">
+            <small>©201558234098王洪棚</small>
+            <small>资料来源：中国天文科普网</small>
+        </div>
+        <div id="Yumemi">
+        </div>
+        <div id="textpad">
+            <span id="text"></span>
+        </div>
+        <!--Yumemi-->
+        <div id="returnTop" class="return hide">
+        </div>
+        <!--插件-->
+        <div id="flask">
+            <div class="flask_pad">
+                <img src="{%static "Yumemi/yumemi_img_1.png"%}">
+                <div>
+                    意见反馈
+                </div>
+                <textarea name="suggest"></textarea>
+                <input type="submit" value="提交">
+                <input type="button" value="关闭" id="delmodel">
+            </div>
+        </div>
+        <!--模态对话框-->
+    </div>
+</body>
+<script type="text/javascript" src="{%static "js/jquery-1.12.3.js"%}"></script>
+<script type="text/javascript" src="{%static "js/Yumemi.js"%}"></script>
+<script type="text/javascript" src="{%static "js/plus.js"%}"></script>
+</html>

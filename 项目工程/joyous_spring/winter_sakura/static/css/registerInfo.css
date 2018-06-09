@@ -1,0 +1,113 @@
+body,html{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 14px;
+	background: #E8E8E8;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+}
+a:hover{
+	color: #cc99cc;
+}
+
+header{
+	z-index: 9;
+	position: fixed;
+	top: 0;
+	background: #669999;
+	width: 100%;
+	/*min-width: 400px;*/
+}
+header div{
+	display: inline-block;
+}
+#logo{
+	margin-left: 40px;
+}
+#logo a{
+	line-height: 36px;
+}
+#logo img{
+	margin-top: 10px;
+	width: 100px;
+}
+#menu{	
+	float: right;
+	margin-top: 34px;
+	margin-right: 40px;
+	font-size: 16px;
+}
+#menu a{
+	margin: 5px;
+}
+#content{
+	position: relative;
+	top: 64px;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 700px;
+	min-width: 700px;
+	background: #fff;
+}
+
+@media(max-width: 400px){
+	#logo img{
+		width: 80px;
+	}
+	#menu{	
+		float: right;
+		margin-top: 34px;
+		margin-right: 20px;
+		font-size: 14px;
+	}
+	#content{
+		top: 55px;
+	}
+}
+
+#registerInfo_content{
+	width: 100%;
+	padding: 40px;
+}
+#registerInfo_content .registerInfo_content_head td{
+	/*width: 38%;*/
+	padding-left: 10px; 
+	border-bottom: 1px solid #669999;
+	color: #818181;
+}
+#registerInfo_content table tr td{
+	padding-left: 10px;
+	color: #818181;
+	line-height: 30px;
+}
+
+#pageList{
+	margin: 0 auto;
+	text-align: center;
+	padding: 10px 0 40px 0;
+}
+#pageList a{
+	background: #669999;
+	margin: 0 4px;
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+#pagePre{
+	padding: 4px 4px !important;
+	margin: 0 7px !important;
+}
+#pageNext{
+	padding: 4px 6px !important;
+}
+#pagePre img,
+#pageNext img{
+	width: 12px;
+	display: inline-block;
+	vertical-align: middle;
+}
+#pageList .pageCurrent{
+	background: #cc99cc;
+}

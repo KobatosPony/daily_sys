@@ -1,0 +1,102 @@
+body,html{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 14px;
+	background: #E8E8E8;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+}
+a:hover{
+	color: #cc99cc;
+}
+
+header{
+	z-index: 9;
+	position: fixed;
+	top: 0;
+	background: #669999;
+	width: 100%;
+	/*min-width: 400px;*/
+}
+header div{
+	display: inline-block;
+}
+#logo{
+	margin-left: 40px;
+}
+#logo a{
+	line-height: 36px;
+}
+#logo img{
+	margin-top: 10px;
+	width: 100px;
+}
+#menu{	
+	float: right;
+	margin-top: 34px;
+	margin-right: 40px;
+	font-size: 16px;
+}
+#menu a{
+	margin: 5px;
+}
+#content{
+	position: relative;
+	top: 64px;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 700px;
+	min-width: 700px;
+	background: #fff;
+}
+
+@media(max-width: 400px){
+	#logo img{
+		width: 80px;
+	}
+	#menu{	
+		float: right;
+		margin-top: 34px;
+		margin-right: 20px;
+		font-size: 14px;
+	}
+	#content{
+		top: 55px;
+	}
+}
+
+#publish{
+	position: relative;
+	top: 0;
+	width: 100%;
+	margin: 0 auto;
+	max-width: 600px;
+	min-width: 550px;
+	background: #fff;
+	padding: 40px 0 80px 0;
+}
+#publish label,
+#publish input,
+#publish textarea{
+	margin: 10px 30px;
+	width: 88%;
+	padding: 4px 6px;
+	color: #818181;
+}
+#publish input{
+	line-height: 24px;
+}
+#publish textarea{
+	resize: none;
+}
+#publishBtn{
+	width: 60px !important;
+	background: #669999;
+	color: #fff !important;
+	border: none;
+	border-radius: 4px;
+	float: right;
+}

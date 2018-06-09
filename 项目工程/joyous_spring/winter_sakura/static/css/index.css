@@ -1,0 +1,118 @@
+body,html{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 14px;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+}
+a:hover{
+	color: #cc99cc;
+}
+
+header{
+	z-index: 9999;
+	position: fixed;
+	background: #669999;
+	width: 100%;
+}
+header div{
+	display: inline-block;
+}
+#logo{
+	margin-left: 36px;
+}
+#logo a{
+	line-height: 40px;
+}
+#logo img{
+	margin-top: 10px;
+	width: 100px;
+}
+#menu{	
+	float: right;
+	margin-top: 34px;
+	margin-right: 40px;
+	font-size: 16px;
+}
+#menu a{
+	margin: 5px;
+}
+
+@media(max-width: 400px){
+	#logo img{
+		width: 80px;
+	}
+	#menu{	
+		float: right;
+		margin-top: 34px;
+		margin-right: 20px;
+		font-size: 14px;
+	}
+	#content{
+		top: 55px;
+	}
+}
+
+#content{
+	margin: 0 auto;
+	max-width: 960px;
+	min-width: 700px;
+}
+#content_img{
+	width: 100%;
+}
+#content_img img{
+	width: 100%;
+}
+
+#contentList{
+	width: 100%;
+}
+#contentList .listMenu{
+	width: 46%;
+	float: left;
+}
+#contentList .listMenu .listHeader{
+	position: relative;
+	background: #669999;
+	border-radius: 8px;
+}
+#contentList .listMenu .listHeader h4{
+	line-height: 40px;
+	font-size: 16px;
+	color: #fff;
+	margin-left: 10px;
+}
+#contentList .listMenu .listHeader >a:hover{
+	color: #cc99cc;
+	text-decoration: underline;
+	text-decoration-color: #cc99cc;
+}
+#contentList .listMenu .listHeader a{
+	position: absolute;
+	right: 10px;
+	top: 0;
+	line-height: 40px;
+	color: #fff;
+}
+#contentList .listMenu .listContent a{
+	color: #474747;
+}
+#contentList .listMenu .listContent a:hover{
+	color: #669999;
+	text-decoration: underline;
+	text-decoration-color: #669999;
+}
+#contentList .listMenu .listContent .listContentDiv{
+	width: 100%;
+	height: 40px;
+	padding-left: 10px;
+}
+#contentList .listMenu .listContent .listContentDiv span{
+	float: right;
+	margin-right: 20px;
+	color: #848484;
+}

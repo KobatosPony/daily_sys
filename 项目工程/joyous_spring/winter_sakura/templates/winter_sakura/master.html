@@ -1,0 +1,651 @@
+{% load static %}
+{% load dict_plus %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>admin</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-theme.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-clockpicker.min.css' %}">
+</head>
+<body>
+	<!-- 头部导航 -->
+    <header>
+		<div id="logo">
+			<a href="{% url 'index' %}">
+				<img src="{% static 'image/logo_white.png' %}">
+			</a>
+		</div>
+		<div id="menu">
+            <a href="{% url 'index' %}">首页</a>
+            <a href="{% url 'theme' page=1 %}">社区</a>
+            {% if ret_user %}
+                <a href="{% url 'person' %}">{{ ret_user.nickname }}({{ ret_user.staff_dept }}-{{ ret_user.true_name }})</a>
+                <a href="{% url 'logout' %}">退出</a>
+            {% else %}
+                <a href="{% url 'login_demo' %}">登录</a>
+                <a href="{% url 'register_demo' %}">注册</a>
+            {% endif %}
+		</div>
+	</header>
+
+
+	<div id="content">
+		<div id="information">
+			<div id="information_left">
+				<div class="left_div">
+					<img src="{% static 'image/person_head.jpg' %}">
+				</div>
+				<div class="left_name">
+					<p>{{ ret_user.username }}</p>
+                    <a href="{% url 'publish_notice' %}"><button id="publishBtn">发布公告</button></a>
+				</div>
+			</div>
+			<div id="information_right">
+				<div class="right_head">
+					<h4>详细信息</h4>
+				</div>
+				<div class="right_content">
+					<table>
+						<tr>
+							<td>姓名：</td>
+							<td id="name">{{ ret_user.true_name }}</td>
+						</tr>
+						<tr>
+							<td>工号：</td>
+							<td id="workNo">{{ ret_user.staff_no }}</td>
+						</tr>
+						<tr>
+							<td>部门：</td>
+							<td id="workPlace">{{ ret_user.staff_dept }}</td>
+						</tr>
+						<tr>
+							<td>职位：</td>
+							<td id="workPlace">{{ ret_user.user_type }}</td>
+						</tr>
+						<tr>
+							<td>联系电话：</td>
+							<td>{{ ret_user.tel }}</td>
+						</tr>
+						<tr>
+							<td>现在住址：</td>
+							<td id="nowPlace">{{ ret_user.address }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- 考勤列表 -->
+		<!-- <div id="registerInfo">
+			<div id="registerInfo_head">
+				<h4>考勤记录
+					<input type="button" name="qd" value="设置考勤时间" id="attendance"/>
+					<span id="attendanceTime">
+						<span>签到：</span>
+						<span id="qdTime">08:30</span>&nbsp;&nbsp;
+						<span>签退：</span>
+						<span id="qtTime">17:30</span>
+					</span>
+					
+				</h4>
+			</div>
+			<div id="registerInfo_content">
+				<table>
+					<tr class="registerInfo_content_head">
+						<td>时间</td>
+						<td>类别</td>
+						<td>备注</td>
+					</tr>
+					<tr>
+						<td>2017-12-29 08:30:00</td>
+						<td>签到</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2017-12-29 15:30:00</td>
+						<td>签退</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2017-12-29 15:30:00</td>
+						<td>请假</td>
+						<td>因病请假，时间一天</td>
+					</tr>
+					<tr>
+						<td>2017-12-29 08:30:00</td>
+						<td>签到</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2017-12-29 15:30:00</td>
+						<td>签退</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2017-12-29 15:30:00</td>
+						<td>请假</td>
+						<td>因病请假，时间一天</td>
+					</tr>
+				</table>
+			</div>
+		</div> -->
+
+		<!-- 请假申请 -->
+		<div id="askForLeave">
+			<div id="askForLeave_head">
+				<h4>请假记录
+                    <a style="float:right;background: #669999;border: none;border-radius: 4px;padding: 3px 6px;
+                    font-size: 12px;margin-top: 6px" id="attendanceList" href="{% url 'check_record' %}">考勤记录</a>
+					<input type="button" name="qd" value="设置考勤时间" id="attendance"/>
+					<span id="attendanceTime">
+						<span>签到：</span>
+						<span id="qdTime">{{ ret_setting_1.value|date:'H:i' }}</span>&nbsp;&nbsp;
+						<span>签退：</span>
+						<span id="qtTime">{{ ret_setting_2.value|date:'H:i' }}</span>
+					</span>
+				</h4>			
+			</div>
+			<div id="askForLeave_content">
+				<div class="askForLeave_content_head">
+					<div>时间</div>
+					<div>类别</div>
+					<div>操作</div>
+				</div>
+                {% for item in ret_leave_info %}
+                    <div class="rows">
+                        <div>{{ item.create_date|date:"Y-m-d H:i" }}</div>
+                        <div>请假</div>
+                        <div><button class="askForLeave_content_detail" value="0">详情</button></div>
+				    </div>
+                    <div class="accessLeave" style="display: none;">
+                        <h4>请假详情</h4>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>请假员工：</td>
+                                    <td class="askForLeave_name">{{ item.staff_id.true_name }}({{ item.staff_id.staff_dept }})</td>
+                                </tr>
+                                <tr>
+                                    <td>员工号：</td>
+                                    <td class="askForLeave_no">{{ item.staff_no }}</td>
+                                </tr>
+                                <tr>
+                                    <td>开始时间：</td>
+                                    <td class="askForLeave_startTime">{{ item.start_date|date:"Y-m-d" }}</td>
+                                </tr>
+                                <tr>
+                                    <td>结束时间：</td>
+                                    <td class="askForLeave_endTime">{{ item.end_date|date:"Y-m-d" }}</td>
+                                </tr>
+                                <tr>
+                                    <td>请假原因：</td>
+                                    <td class="askForLeave_cause">{{ item.reason }}</td>
+                                </tr>
+                            </table>
+                            <div style="margin-left: 100px;">
+                                <span style="display: none">{{ item.check_id_id }}</span>
+                                <input type="button" name="" class="accessBtn" value="批准">
+                                <input type="button" name="" class="unaccessBtn" value="驳回">
+                                <input type="button" name="" class="unsure_ac" value="取消">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+{#				<div class="rows">#}
+{#					<div>2017-12-29 08:30:00</div>#}
+{#					<div>请假</div>#}
+{#					<div><button class="askForLeave_content_detail" value="0">详情</button></div>#}
+{#				</div>#}
+{#				<div class="accessLeave" style="display: none;">#}
+{#					<h4>请假详情</h4>#}
+{#					<div>#}
+{#						<table>#}
+{#							<tr>#}
+{#								<td>请假员工：</td>#}
+{#								<td class="askForLeave_name">lucas</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>员工号：</td>#}
+{#								<td class="askForLeave_no">110110110111</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>开始时间：</td>#}
+{#								<td class="askForLeave_startTime">2017-12-21</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>结束时间：</td>#}
+{#								<td class="askForLeave_endTime">2017-12-22</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>请假原因：</td>#}
+{#								<td class="askForLeave_cause">生病</td>#}
+{#							</tr>#}
+{#						</table>#}
+{#						<div style="margin-left: 100px;">#}
+{#							<input type="button" name="" class="accessBtn" value="批准">#}
+{#							<input type="button" name="" class="unaccessBtn" value="驳回">#}
+{#							<input type="button" name="" class="unsure_ac" value="取消">#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+{##}
+{#				<div class="rows">#}
+{#					<div>2017-12-29 08:30:00</div>#}
+{#					<div>请假</div>#}
+{#					<div><button class="askForLeave_content_detail" value="0">详情</button></div>#}
+{#				</div>#}
+{#				<div class="accessLeave" style="display: none;">#}
+{#					<h4>请假详情</h4>#}
+{#					<div>#}
+{#						<table>#}
+{#							<tr>#}
+{#								<td>请假员工：</td>#}
+{#								<td class="askForLeave_name">lucas</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>员工号：</td>#}
+{#								<td class="askForLeave_no">110110110112</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>开始时间：</td>#}
+{#								<td class="askForLeave_startTime">2017-12-21</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>结束时间：</td>#}
+{#								<td class="askForLeave_endTime">2017-12-22</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>请假原因：</td>#}
+{#								<td class="askForLeave_cause">生病</td>#}
+{#							</tr>#}
+{#						</table>#}
+{#						<div style="margin-left: 100px;">#}
+{#							<input type="button" name="" class="accessBtn" value="批准">#}
+{#							<input type="button" name="" class="unaccessBtn" value="驳回">#}
+{#							<input type="button" name="" class="unsure_ac" value="取消">#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+{##}
+{#				<div class="rows">#}
+{#					<div>2017-12-29 08:30:00</div>#}
+{#					<div>请假</div>#}
+{#					<div><button class="askForLeave_content_detail" value="0">详情</button></div>#}
+{#				</div>#}
+{#				<div class="accessLeave" style="display: none;">#}
+{#					<h4>请假详情</h4>#}
+{#					<div>#}
+{#						<table>#}
+{#							<tr>#}
+{#								<td>请假员工：</td>#}
+{#								<td class="askForLeave_name">lucas</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>员工号：</td>#}
+{#								<td class="askForLeave_no">110110110113</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>开始时间：</td>#}
+{#								<td class="askForLeave_startTime">2017-12-21</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>结束时间：</td>#}
+{#								<td class="askForLeave_endTime">2017-12-22</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>请假原因：</td>#}
+{#								<td class="askForLeave_cause">生病</td>#}
+{#							</tr>#}
+{#						</table>#}
+{#						<div style="margin-left: 100px;">#}
+{#							<input type="button" name="" class="accessBtn" value="批准">#}
+{#							<input type="button" name="" class="unaccessBtn" value="驳回">#}
+{#							<input type="button" name="" class="unsure_ac" value="取消">#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+{##}
+{#				<div class="rows">#}
+{#					<div>2017-12-29 08:30:00</div>#}
+{#					<div>请假</div>#}
+{#					<div><button class="askForLeave_content_detail" value="0">详情</button></div>#}
+{#				</div>#}
+{#				<div class="accessLeave" style="display: none;">#}
+{#					<h4>请假详情</h4>#}
+{#					<div>#}
+{#						<table>#}
+{#							<tr>#}
+{#								<td>请假员工：</td>#}
+{#								<td class="askForLeave_name">lucas</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>员工号：</td>#}
+{#								<td class="askForLeave_no">110110110114</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>开始时间：</td>#}
+{#								<td class="askForLeave_startTime">2017-12-21</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>结束时间：</td>#}
+{#								<td class="askForLeave_endTime">2017-12-22</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>请假原因：</td>#}
+{#								<td class="askForLeave_cause">生病</td>#}
+{#							</tr>#}
+{#						</table>#}
+{#						<div style="margin-left: 100px;">#}
+{#							<input type="button" name="" class="accessBtn" value="批准">#}
+{#							<input type="button" name="" class="unaccessBtn" value="驳回">#}
+{#							<input type="button" name="" class="unsure_ac" value="取消">#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+{##}
+{#				<div class="rows">#}
+{#					<div>2017-12-29 08:30:00</div>#}
+{#					<div>请假</div>#}
+{#					<div><button class="askForLeave_content_detail" value="0">详情</button></div>#}
+{#				</div>#}
+{#				<div class="accessLeave" style="display: none;">#}
+{#					<h4>请假详情</h4>#}
+{#					<div>#}
+{#						<table>#}
+{#							<tr>#}
+{#								<td>请假员工：</td>#}
+{#								<td class="askForLeave_name">lucas</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>员工号：</td>#}
+{#								<td class="askForLeave_no">110110110115</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>开始时间：</td>#}
+{#								<td class="askForLeave_startTime">2017-12-21</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>结束时间：</td>#}
+{#								<td class="askForLeave_endTime">2017-12-22</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>请假原因：</td>#}
+{#								<td class="askForLeave_cause">生病</td>#}
+{#							</tr>#}
+{#						</table>#}
+{#						<div style="margin-left: 100px;">#}
+{#							<input type="button" name="" class="accessBtn" value="批准">#}
+{#							<input type="button" name="" class="unaccessBtn" value="驳回">#}
+{#							<input type="button" name="" class="unsure_ac" value="取消">#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+			</div>
+		</div>
+
+		<!-- 每日统计 -->
+		<div id="statistics">
+			<div id="statistics_head">
+				<h4 style="margin: 0">每日统计
+                    <form>
+						<input type="button" name="" id="createBtn" value="生成今日统计">
+					</form>
+					<form>
+						<input type="button" name="" id="statisticsTimeBtn" value="查看">
+						<input type="date" name="statisticsTime" id="statisticsTime">
+					</form>
+				</h4>
+                <span id="pic_msg" style="display: none"></span>
+			</div>
+			<div id="statistics_content" style="display: none">
+
+				<canvas id="chart" width="600" height="500"></canvas>
+				<table id="chartData">
+					<tr>
+						<th>考勤统计</th><th>数量<span id="pic_d0"></span></th>
+					</tr>
+					<tr style="color:#0DA068">
+						<td>正常考勤人数</td><td id="pic_d1"></td>
+					</tr>
+					<tr style="color:#669999">
+						<td>缺勤人数</td><td id="pic_d2"></td>
+					</tr>
+					<tr style="color:#194E9C">
+						<td>迟到人数</td><td id="pic_d3"></td>
+					</tr>
+					<tr style="color:#ED9C13">
+						<td>早退人数</td><td id="pic_d4"></td>
+					</tr>
+                    <tr style="color:#31708f">
+						<td>迟到早退人数</td><td id="pic_d5"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+        <div id="daily_text" style="padding: 0 40px 40px 100px; color: #818181">
+            <p id="daily_text_1"></p>
+            <p id="daily_text_2"></p>
+            <p id="daily_text_3"></p>
+            <p id="daily_text_4"></p>
+            <p id="daily_text_5"></p>
+        </div>
+	</div>
+
+	<!-- 遮罩层 -->
+	<div id="wrap">
+		
+	</div>
+
+	<!-- 设置考勤时间 -->
+	<div id="attendanceDiv">
+		<h4>设置考勤时间</h4>
+		<form>
+			<div class="input-group clockpicker">
+				<span>签到时间：</span><br>
+				<input type="text" class="form-control" value="09:30" id="qdTiemSet">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-time"></span>
+				</span>
+			</div>
+			<div class="input-group clockpicker">
+				<span>签退时间：</span><br>
+				<input type="text" class="form-control" value="09:30" id="qtTiemSet">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-time"></span>
+				</span><br>
+			</div>
+			<input type="button" name="" id="sure_set" value="确认">
+			<input type="button" name="" id="unsure_set" value="取消">
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-clockpicker.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-clockpicker.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/pieChart.js' %}"></script>
+
+<script type="text/javascript">
+	$('.clockpicker').clockpicker();
+
+	var w = $(document).width();
+	var h = $(document).height();
+
+	$("#wrap").css("height",h + "px");
+	$("#attendanceDiv").css({
+		// "top":(h - 1000)/2 + "px",
+		"left":(w - 340)/2 + "px"
+	});
+	$(".accessLeave").css({
+		"left":(w - 400)/2 + "px"
+	});
+
+	// 设置考勤时间
+	$("#attendance").click(function(){
+		$("#wrap").css("display","block");
+		$("#attendanceDiv").css("display","block");
+	});
+
+	$("#unsure_set").click(function(){
+		$("#wrap").css("display","none");
+		$("#attendanceDiv").css("display","none");
+	});
+
+	// 请假详情
+	$(".askForLeave_content_detail").click(function(){
+		var index = $(".askForLeave_content_detail").index(this);
+		var idVal = $(".askForLeave_content_detail").eq(index).val();
+		$("#wrap").css("display","block");
+		$(".accessLeave").eq(index).css("display","block");
+	});
+	$(".unsure_ac").click(function(){
+		var index = $(".unsure_ac").index(this);
+		$("#wrap").css("display","none");
+		$(".accessLeave").eq(index).css("display","none");
+	});
+
+    $('#sure_set').click(
+            function(){
+                var setting_1 = $('#qdTiemSet').val();
+                var setting_2 = $('#qtTiemSet').val();
+                $.ajax(
+                        {
+                            url:"{% url 'check_time_setting_ajax' %}",
+                            type:'POST',
+                            data:{'setting_1':setting_1, 'setting_2':setting_2},
+                            dataType: 'json',
+                            success:function(result){
+                                $("#wrap").css("display","none");
+		                        $("#attendanceDiv").css("display","none");
+                                $('#qdTime').text(result['ret_time_1']);
+                                $('#qtTime').text(result['ret_time_2']);
+                            },
+                            error:function(){
+                                console.log("该页面出现错误!")
+                            }
+                        }
+                )
+            }
+    );
+    $('.accessBtn').click(
+            function(){
+                var leave_id = $(this).parent().find('span').text();
+                 $.ajax(
+                        {
+                            url:"{% url 'access' %}",
+                            type:'POST',
+                            data:{'leave_id':leave_id},
+                            dataType: 'json',
+                            success:function(result){
+                                var index = $(".unsure_ac").index(this);
+                                $("#wrap").css("display","none");
+                                $(".accessLeave").eq(index).css("display","none");
+                                $('.rows').eq(index).remove()
+                            },
+                            error:function(){
+                                console.log("该页面出现错误!")
+                            }
+                        }
+                )
+            }
+    );
+    $('.unaccessBtn').click(
+            function(){
+                var leave_id = $(this).parent().find('span').text();
+                 $.ajax(
+                        {
+                            url:"{% url 'unaccess' %}",
+                            type:'POST',
+                            data:{'leave_id':leave_id},
+                            dataType: 'json',
+                            success:function(result){
+                                var index = $(".unsure_ac").index(this);
+                                $("#wrap").css("display","none");
+                                $(".accessLeave").eq(index).css("display","none");
+                                $('.rows').eq(index).remove()
+                            },
+                            error:function(){
+                                console.log("该页面出现错误!")
+                            }
+                        }
+                )
+            }
+    );
+    $('#createBtn').click(
+            function(){
+                 $.ajax(
+                        {
+                            url:"{% url 'statistics' %}",
+                            type:'POST',
+                            data:{},
+                            dataType: 'json',
+                            success:function(result){
+                                $("#pic_d0").text(result['staff_count']);
+                                $("#pic_d1").text(result['check_staff']);
+                                $("#pic_d2").text(result['uncheck_staff']);
+                                $("#pic_d3").text(result['late_staff']);
+                                $("#pic_d4").text(result['leave_staff']);
+                                $("#pic_d5").text(result['late_and_leave_staff']);
+                                $('#statistics_content').css('display','block');
+
+                                $("#daily_text_1").text(result['uncheck_staff_text']);
+                                $("#daily_text_2").text(result['check_staff_text']);
+                                $("#daily_text_3").text(result['late_staff_text']);
+                                $("#daily_text_4").text(result['leave_staff_text']);
+                                $("#daily_text_5").text(result['late_and_leave_staff_text']);
+                                $(pieChart)
+                            },
+                            error:function(){
+                                console.log("该页面出现错误!")
+                            }
+                        }
+                )
+            }
+    );
+    $('#statisticsTimeBtn').click(
+            function(){
+                var select_time = $('#statisticsTime').val();
+                 $.ajax(
+                        {
+                            url:"{% url 'select_daily' %}",
+                            type:'POST',
+                            data:{'select_time':select_time},
+                            dataType: 'json',
+                            success:function(result){
+                                if(result['flag']==1){
+                                    $("#pic_d0").text(result['staff_count']);
+                                    $("#pic_d1").text(result['check_staff']);
+                                    $("#pic_d2").text(result['uncheck_staff']);
+                                    $("#pic_d3").text(result['late_staff']);
+                                    $("#pic_d4").text(result['leave_staff']);
+                                    $("#pic_d5").text(result['late_and_leave_staff']);
+                                    $("#pic_msg").css('display','none');
+
+                                    $("#daily_text_1").text(result['uncheck_staff_text']);
+                                    $("#daily_text_2").text(result['check_staff_text']);
+                                    $("#daily_text_3").text(result['late_staff_text']);
+                                    $("#daily_text_4").text(result['leave_staff_text']);
+                                    $("#daily_text_5").text(result['late_and_leave_staff_text']);
+
+                                    $('#statistics_content').css('display','block');
+                                    $(pieChart)
+                                }
+                                else {
+                                    $('#statistics_content').css('display','none');
+                                    $("#pic_msg").css('display','block').text("未找到相关信息");
+                                }
+
+                            },
+                            error:function(){
+                                console.log("该页面出现错误!")
+                            }
+                        }
+                )
+            }
+    );
+
+</script>
+</html>

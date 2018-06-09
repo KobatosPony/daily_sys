@@ -1,0 +1,21 @@
+{% load static %}
+{% load dict_plus %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>签到测试</title>
+</head>
+<body>
+<form method="post">
+    <input name="sign_flag" type="number" value="1" style="display: none">
+    <input type="submit" value="签到">
+</form>
+<br><br>
+<form method="post">
+    <input name="sign_flag" type="number" value="0" style="display: none">
+    <input type="submit" value="取消签到">
+</form>
+<h3>{{ is_sign }}</h3>
+</body>
+</html>

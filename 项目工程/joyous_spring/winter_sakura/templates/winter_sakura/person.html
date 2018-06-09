@@ -1,0 +1,269 @@
+{% load static %}
+{% load dict_plus %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>个人中心</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/person.css' %}">
+</head>
+<body>
+	<!-- 头部导航 -->
+	<header>
+		<div id="logo">
+			<a href="{% url 'index' %}">
+				<img src="{% static 'image/logo_white.png' %}">
+			</a>
+		</div>
+		<div id="menu">
+			<a href="{% url 'index' %}">首页</a>
+			<a href="{% url 'theme' page=1 %}">社区</a>
+			<a href="{% url 'logout' %}">退出</a>
+		</div>
+	</header>
+
+	<!-- 内容页 -->
+	<div id="content">
+		<div id="information">
+			<div id="information_left">
+				<div class="left_div">
+					<img src="{% static 'image/person_head.jpg' %}">
+				</div>
+				<div class="left_name">
+					<p>{{ ret_user.username }}</p>
+				</div>
+			</div>
+			<div id="information_right">
+				<div class="right_head">
+					<h4>详细信息</h4>
+				</div>
+				<div class="right_content">
+					<table>
+						<tr>
+							<td>姓名：</td>
+							<td id="name">{{ ret_user.true_name }}</td>
+						</tr>
+						<tr>
+							<td>工号：</td>
+							<td id="workNo">{{ ret_user.staff_no }}</td>
+						</tr>
+						<tr>
+							<td>部门：</td>
+							<td id="workPlace">{{ ret_user.staff_dept }}</td>
+						</tr>
+						<tr>
+							<td>职位：</td>
+							<td id="workPlace">{{ ret_user.user_type }}</td>
+						</tr>
+						<tr>
+							<td>联系电话：</td>
+							<td>{{ ret_user.tel }}</td>
+						</tr>
+						<tr>
+							<td>现在住址：</td>
+							<td id="nowPlace">{{ ret_user.address }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- 考勤列表 -->
+		<div id="registerInfo">
+			<div id="registerInfo_head">
+				<h4>考勤记录
+                    {% if ret_user.state == 0 %}
+                    	<input type="button" name="qj" value="请假" id="qj"/>
+                        <input type="button" name="qt" value="签退" id="qt"/>
+                        <input type="button" name="qd" value="签到" id="qd"/>
+                    {% elif  ret_user.state == 1 %}
+                        <input type="button" name="qj" value="请假" id="qj"/>
+                        <input type="button" name="qt" value="签退" id="qt"/>
+                    {% elif  ret_user.state == 2 %}
+                        <input type="button" name="qj" value="请假" id="qj"/>
+                    {% endif %}
+{#					<input type="button" name="qj" value="请假" id="qj"/>#}
+{#					<input type="button" name="qt" value="签退" id="qt"/>#}
+{#					<input type="button" name="qd" value="签到" id="qd"/>#}
+				</h4>
+			</div>
+			<div id="registerInfo_content">
+				<table id="registerInfo_content_table">
+					<tr class="registerInfo_content_head" id="registerInfo_content_tr">
+						<td>时间</td>
+						<td>类别</td>
+						<td>备注</td>
+					</tr>
+
+{#                获取考勤信息#}
+                    {% for item in ret_check_info %}
+                        <tr>
+						<td>{{ item.check_time|date:"Y-m-d H:i" }}</td>
+						<td>{{ item.check_type }}</td>
+                            {% if  item.remarks != None %}
+                                <td>{{ item.remarks }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+
+					</tr>
+                    {% endfor %}
+
+				</table>
+			</div>
+		</div>
+
+		<!-- 社交记录 -->
+		<!-- <div id="communityInfo">
+			<div id="communityInfo_head">
+				<h4>社交记录
+					<input type="button" name="" value="发表"/>
+				</h4>
+			</div>
+			<div id="communityInfo_content">
+				<table>
+					<tr class="communityInfo_content_head">
+						<td class="infoTime">时间</td>
+						<td class="infoTitle">标题</td>
+						<td class="detailBtn">操作</td>
+					</tr>
+					<tr>
+						<td>2017-12-29 08:30:00</td>
+						<td>再见了，相互嫌弃的老同学</td>
+						<td class="detailBtn"><a href="#">详情</a></td>
+					</tr>
+					<tr>
+						<td>2017-12-29 08:30:00</td>
+						<td>再见了，相互嫌弃的老同学</td>
+						<td class="detailBtn"><a href="#">详情</a></td>
+					</tr>
+					<tr>
+						<td>2017-12-29 08:30:00</td>
+						<td>再见了，相互嫌弃的老同学</td>
+						<td class="detailBtn"><a href="#">详情</a></td>
+					</tr>
+				</table>
+			</div>
+		</div> -->
+	</div>
+
+	<!-- 遮罩层 -->
+	<div id="wrap">
+		
+	</div>
+	<!-- 签退弹出框 -->
+	<div id="qtDiv">
+		<div>
+			<p>请确认是否执行签退？</p>
+			<input type="button" name="" id="sure_qt" value="确认">
+			<input type="button" name="" id="unsure_qt" value="取消">
+		</div>
+	</div>
+
+	<!-- 请假弹出框 -->
+	<div id="qjDiv">
+		<div>
+            <form id="leave_form" method="post" action="{% url 'leave_publish' %}">
+                <h4>请假填写</h4>
+                <label>开始时间：</label><br>
+                <input type="date" name="start_time" id="startTime" placeholder="请假开始时间"><br><br>
+                <label>结束时间：</label><br>
+                <input type="date" name="end_time" id="endTime" placeholder="请假结束时间"><br><br>
+                <label>请假理由：</label><br>
+                <textarea id="caruse" rows="6" placeholder="请假理由" name="reason"></textarea><br><br>
+                <input type="button" name="" id="sure_qj" value="确认">
+                <input type="button" name="" id="unsure_qj" value="取消">
+            </form>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+
+<script type="text/javascript">
+	var w = $(document).width();
+	var h = $(document).height();
+	$("#wrap").css("height",h + "px");
+	$("#qtDiv").css({
+		"left":(w - 300)/2 + "px",
+		"top":(h - 400)/2 + "px" 
+	});
+	$("#qjDiv").css({
+		"left":(w - 400)/2 + "px",
+		"top":(h - 600)/2 + "px"
+	});
+
+	$("#qt").click(function(){
+		$("#wrap").css("display","block");
+		$("#qtDiv").css("display","block");
+	});
+	$("#unsure_qt").click(function(){
+		$("#wrap").css("display","none");
+		$("#qtDiv").css("display","none");
+	});
+
+	$("#qj").click(function(){
+		$("#wrap").css("display","block");
+		$("#qjDiv").css("display","block");
+	});
+	$("#unsure_qj").click(function(){
+		$("#wrap").css("display","none");
+		$("#qjDiv").css("display","none");
+	});
+     $('#sure_qj').click(function(){
+         $('#leave_form').submit();
+     });
+{#ajax_check_in#}
+{#    ajax_check_out#}
+     $('#qd').click(
+            function(){
+                $.ajax(
+                        {
+                            url:"{% url 'ajax_check_in' %}",
+                            type:'POST',
+                            data:{'type':1},
+                            dataType: 'json',
+                            success:function(result){
+                                $("#qd").remove();
+                                $('#registerInfo_content_tr').after(
+                                        "<tr><td>"+result['ret_check_time']+"</td><td>"+result['ret_check_type']+
+                                        "</td><td></td></tr>"
+                                )
+                            },
+                            error:function(){
+                                console.log("该页面出现错误!")
+                            }
+                        }
+                )
+            }
+    );
+     $('#sure_qt').click(
+            function(){
+                $.ajax(
+                        {
+                            url:"{% url 'ajax_check_out' %}",
+                            type:'POST',
+                            data:{'type':2},
+                            success:function(result){
+                                $("#qt").remove();
+                                $('#qtDiv').css('display','none');
+                                $("#wrap").css("display","none");
+                                $('#registerInfo_content_tr').after(
+                                        "<tr><td>"+result['ret_check_time']+"</td><td>"+result['ret_check_type']+
+                                        "</td><td></td></tr>"
+                                );
+                                if( result['check_in'] == 1){
+                                     $('#registerInfo_content_tr').after(
+                                        "<tr><td>"+result['ret_check_time_in']+"</td><td>"+result['ret_check_type_in']+
+                                        "</td><td></td></tr>"
+                                );
+                                }
+                            },
+                            error:function(){
+                                console.log("该页面出现错误!")
+                            }
+                        }
+                )
+            }
+    )
+</script>
+</html>

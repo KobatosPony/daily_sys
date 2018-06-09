@@ -1,0 +1,59 @@
+{% load static %}
+{% load dict_plus %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>主题</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/community.css' %}">
+</head>
+<body>
+	<!-- 头部导航 -->
+	<header>
+		<div id="logo">
+			<a href="{% url 'index' %}">
+				<img src="{% static 'image/logo_white.png' %}">
+			</a>
+		</div>
+		<div id="menu">
+            <a href="{% url 'index' %}">首页</a>
+            <a href="{% url 'theme' page=1 %}">社区</a>
+            {% if ret_user %}
+                <a href="{% url 'person' %}">{{ ret_user.nickname }}({{ ret_user.staff_dept }}-{{ ret_user.true_name }})</a>
+                <a href="{% url 'logout' %}">退出</a>
+            {% else %}
+                <a href="{% url 'login_demo' %}">登录</a>
+                <a href="{% url 'register_demo' %}">注册</a>
+            {% endif %}
+		</div>
+	</header>
+
+	<div id="content">
+        {% for item in ret_theme %}
+            <div class="listContent">
+                <a href="{% url 'theme_part' theme_id=item.id page=1 %}">{{ item.title }}</a>
+                <p>{{ item.content }}</p>
+                <div class="author">
+                    <span><img src="{% static 'image/person.png' %}">&nbsp;{{ item.user.nickname }}</span>
+                    <span><img src="{% static 'image/time.png' %}" style="width: 12px;">&nbsp;{{ item.create_date|date:"Y年m月d日 H:i" }}</span>
+                </div>
+		    </div>
+        {% endfor %}
+
+
+		<div id="pageList">
+			{{ page_html }}
+		</div>
+	</div>
+	<div id="publish">
+		<form method="post" action="{% url 'theme_publish' %}">
+			<label>标题：</label><br>
+			<input type="text" name="publishTitle" id="publishTitle" placeholder="请输入标题"><br><br>
+			<label>内容：</label><br>
+			<textarea name="publishContent" rows="16" id="publishContent" placeholder="请输入发布内容"></textarea>
+			<input type="submit" name="publishBtn" id="publishBtn" value="发&nbsp;表">
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+</html>

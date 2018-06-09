@@ -1,0 +1,161 @@
+body,html{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 14px;
+	background: #E8E8E8;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+}
+a:hover{
+	color: #cc99cc;
+}
+
+header{
+	z-index: 9;
+	position: fixed;
+	top: 0;
+	background: #669999;
+	width: 100%;
+	/*min-width: 400px;*/
+}
+header div{
+	display: inline-block;
+}
+#logo{
+	margin-left: 40px;
+}
+#logo a{
+	line-height: 36px;
+}
+#logo img{
+	margin-top: 10px;
+	width: 100px;
+}
+#menu{	
+	float: right;
+	margin-top: 34px;
+	margin-right: 40px;
+	font-size: 16px;
+}
+#menu a{
+	margin: 5px;
+}
+#content{
+	position: relative;
+	top: 64px;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 600px;
+	min-width: 550px;
+	background: #fff;
+}
+
+@media(max-width: 400px){
+	#logo img{
+		width: 80px;
+	}
+	#menu{	
+		float: right;
+		margin-top: 34px;
+		margin-right: 20px;
+		font-size: 14px;
+	}
+	#content{
+		top: 55px;
+	}
+}
+
+#content .listContent{
+	width: 100%;
+	padding: 20px 30px;
+}
+#content .listContent a{
+	font-size: 16px;
+	color: #669999;
+}
+#content .listContent a:hover{
+	text-decoration: underline;
+}
+#content .listContent p{
+	padding-right: 50px;
+	font-size: 14px;
+	color: #818181;
+	padding-bottom: 20px;
+	margin-bottom: 0;
+}
+#content .listContent img{
+	width: 15px;
+}
+#content .listContent span{
+	color: #818181;
+	margin-right: 20px;
+}
+#content .listContent .author{
+	border-bottom: 1px solid #669999;
+	padding-bottom: 6px;
+	width: 90%;
+}
+
+#pageList{
+	margin: 0 auto;
+	text-align: center;
+	padding: 10px 0 40px 0;
+}
+#pageList a{
+	background: #669999;
+	margin: 0 4px;
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+#pagePre{
+	padding: 4px 4px !important;
+	margin: 0 7px !important;
+}
+#pageNext{
+	padding: 4px 6px !important;
+}
+#pagePre img,
+#pageNext img{
+	width: 12px;
+	display: inline-block;
+	vertical-align: middle;
+}
+#pageList .pageCurrent{
+	background: #cc99cc;
+}
+
+#publish{
+	position: relative;
+	top: 100px;
+	width: 100%;
+	margin: 0 auto;
+	max-width: 600px;
+	min-width: 550px;
+	background: #fff;
+	padding: 40px 0 80px 0;
+}
+#publish label,
+#publish input,
+#publish textarea{
+	margin: 10px 30px;
+	width: 88%;
+	padding: 4px 6px;
+	color: #818181;
+}
+#publish input{
+	line-height: 24px;
+}
+#publish textarea{
+	resize: none;
+}
+#publishBtn{
+	width: 60px !important;
+	background: #669999;
+	color: #fff !important;
+	border: none;
+	border-radius: 4px;
+	float: right;
+}

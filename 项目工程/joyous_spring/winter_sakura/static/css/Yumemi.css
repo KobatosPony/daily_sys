@@ -1,0 +1,31 @@
+#Yumemi{
+    background: url("../Yumemi/2mini.png") no-repeat;
+    width: 246px;
+    height: 280px;
+    z-index: 450;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+#textpad{
+    text-align: left;
+    display: none;
+    background: url("../Yumemi/post_1.png") no-repeat;
+    width: 231px;
+    height: 156px;
+    z-index: 444;
+    position: fixed;
+    bottom: 280px;
+    left: 125px;
+}
+
+#text{
+    color: white;
+    position: relative;
+    left: 30px;
+    bottom:-20px;
+    font-size: 18px;
+    line-height: 30px;
+    font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif;
+}

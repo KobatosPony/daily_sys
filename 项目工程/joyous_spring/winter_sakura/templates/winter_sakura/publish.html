@@ -1,0 +1,42 @@
+{% load static %}
+{% load dict_plus %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>发布公告</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/publish.css' %}">
+</head>
+<body>
+	<!-- 头部导航 -->
+    <header>
+		<div id="logo">
+			<a href="{% url 'index' %}">
+				<img src="{% static 'image/logo_white.png' %}">
+			</a>
+		</div>
+		<div id="menu">
+            <a href="{% url 'index' %}">首页</a>
+            <a href="{% url 'theme' page=1 %}">社区</a>
+            {% if ret_user %}
+                <a href="{% url 'person' %}">{{ ret_user.nickname }}({{ ret_user.staff_dept }}-{{ ret_user.true_name }})</a>
+                <a href="{% url 'logout' %}">退出</a>
+            {% else %}
+                <a href="{% url 'login_demo' %}">登录</a>
+                <a href="{% url 'register_demo' %}">注册</a>
+            {% endif %}
+		</div>
+	</header>
+
+	<div id="content">
+		<div id="publish">
+			<form method="post" action="{% url 'publish_notice' %}">
+				<label>公告内容：</label><br>
+				<input type="text" name="publishContent" id="publishTitle" placeholder="请输入公告"><br><br>
+				<input type="submit" name="publishBtn" id="publishBtn" value="发&nbsp;表">
+			</form>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+</html>
